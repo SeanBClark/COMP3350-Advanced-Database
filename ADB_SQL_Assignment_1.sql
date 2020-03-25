@@ -4,6 +4,13 @@
 --USE UniDB
 --GO
 
+DROP TABLE Timetable_Info
+DROP TABLE Course_Offering
+DROP TABLE Facilities
+DROP TABLE Building
+DROP TABLE Campus
+DROP TABLE Minor
+DROP TABLE Major
 DROP TABLE CourseProgramAssign
 DROP TABLE GroupCourseAssign
 DROP TABLE PreReqCourseGroup
@@ -187,4 +194,71 @@ Course_Type VARCHAR(30), --can be core, directed or compulsory for example
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Major (
+Major_ID INT PRIMARY KEY IDENTITY(1,1),
+Course_ID INT, --what course is it a major of?
+MajorName VARCHAR(80) UNIQUE NOT NULL,
+Description TEXT,
+Total_Credits INT NOT NULL, --total credits to complete major
+Conditions VARCHAR(200) NOT NULL,
+FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+)
+
+CREATE TABLE Minor (
+Minor_ID INT PRIMARY KEY IDENTITY(1,1),
+Course_ID INT, --what course is it a minor of?
+MinorName VARCHAR(80) UNIQUE NOT NULL,
+Description TEXT,
+Total_Credits INT NOT NULL, --total credits to complete minor
+Conditions VARCHAR(200) NOT NULL,
+FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Campus (
+Campus_ID INT PRIMARY KEY IDENTITY(1,1),
+Campus_Name VARCHAR(100) NOT NULL UNIQUE, --Every campus name should be unique
+City VARCHAR(70) NOT NULL,
+Country VARCHAR(70) NOT NULL
+)
+
+CREATE TABLE Building (
+Building_ID INT PRIMARY KEY IDENTITY(1,1),
+Campus_ID INT,
+Building_Name VARCHAR(70) NOT NULL,
+Location VARCHAR(50) NOT NULL, --west side, east side....
+FOREIGN KEY (Campus_ID) REFERENCES Campus(Campus_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Facilities (
+Facility_ID INT PRIMARY KEY IDENTITY(1,1),
+Building_ID INT,
+Room_No INT NOT NULL,
+Capacity INT NOT NULL,
+Type VARCHAR(100) NOT NULL, --Lab, Lecture hall........
+FOREIGN KEY (Building_ID) REFERENCES Building(Building_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Course_Offering (
+CourseOffering_ID INT PRIMARY KEY IDENTITY(1,1),
+Course_ID INT,
+Staff_ID INT,
+SemTriSem_ID INT,
+Campus_ID INT,
+FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+FOREIGN KEY (Staff_ID) REFERENCES Course_Coordinator(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+--FOREIGN KEY (Campus_ID) REFERENCES Campus(Campus_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Timetable_Info (
+Timetable_ID INT PRIMARY KEY IDENTITY(1,1),
+CourseOffering_ID INT,
+Facility_ID INT,
+Start_Time TIME,
+End_Time TIME,
+Date DATE,
+FOREIGN KEY (Facility_ID) REFERENCES Facilities(Facility_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )

@@ -3,7 +3,9 @@
 --GO
 --USE UniDB
 --GO
+-- RUN THIS COMMAND IF YOU WANT TO CREATE A NEW DB TO WORK ON ^^^^^
 
+DROP TABLE Course_Enrolments
 DROP TABLE Timetable_Info
 DROP TABLE Course_Offering
 DROP TABLE Facilities
@@ -249,10 +251,9 @@ Campus_ID INT,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Staff_ID) REFERENCES Course_Coordinator(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
---FOREIGN KEY (Campus_ID) REFERENCES Campus(Campus_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Timetable_Info (
+CREATE TABLE Timetable_Info ( --the facilitie outlines what campus a course offering is carried out
 Timetable_ID INT PRIMARY KEY IDENTITY(1,1),
 CourseOffering_ID INT,
 Facility_ID INT,
@@ -261,4 +262,15 @@ End_Time TIME,
 Date DATE,
 FOREIGN KEY (Facility_ID) REFERENCES Facilities(Facility_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
+CREATE TABLE Course_Enrolments ( --May need to fix this table but at the moment it stores what is needed
+CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
+Student_ID INT,
+CourseOffering_ID INT,
+Date_Registered DATE,
+Final_Mark INT,
+Final_Grade VARCHAR(2), --HD, D, C....
+FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID), --DOES NOT NEED TO BE UPDATED / DELETED, RECORDS OF COURSE OFFER MUST BE KEPT ORIGINAL
+FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )

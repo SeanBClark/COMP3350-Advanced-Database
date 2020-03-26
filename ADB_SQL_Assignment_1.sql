@@ -1,9 +1,9 @@
---if not exists(select * from sys.databases where name = 'UniDB')
---    create database UniDB
---GO
---USE UniDB
---GO
--- RUN THIS COMMAND IF YOU WANT TO CREATE A NEW DB TO WORK ON ^^^^^
+if not exists(select * from sys.databases where name = 'UniDB')
+    create database UniDB
+GO
+USE UniDB
+GO
+ ----RUN THIS COMMAND IF YOU WANT TO CREATE A NEW DB TO WORK ON ^^^^^
 
 DROP TABLE Course_Enrolments
 DROP TABLE Timetable_Info
@@ -247,7 +247,6 @@ CourseOffering_ID INT PRIMARY KEY IDENTITY(1,1),
 Course_ID INT,
 Staff_ID INT,
 SemTriSem_ID INT,
-Campus_ID INT,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Staff_ID) REFERENCES Course_Coordinator(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -271,6 +270,6 @@ CourseOffering_ID INT,
 Date_Registered DATE,
 Final_Mark INT,
 Final_Grade VARCHAR(2), --HD, D, C....
-FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID), --DOES NOT NEED TO BE UPDATED / DELETED, RECORDS OF COURSE OFFER MUST BE KEPT ORIGINAL
+FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )

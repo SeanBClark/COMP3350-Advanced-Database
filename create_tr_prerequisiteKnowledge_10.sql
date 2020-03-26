@@ -7,6 +7,7 @@
 --USE TriggerTest
 --GO
 
+DROP TABLE CourseProgramAssign
 DROP TABLE Course_Enrolments
 DROP TABLE Course_Offering
 DROP TABLE GroupCourseAssign
@@ -55,6 +56,14 @@ FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
+CREATE TABLE CourseProgramAssign ( --this keeps track of a course assigned to a program, group PK references the pre reqs for the course
+CourseProgID INT PRIMARY KEY IDENTITY(1,1),
+Group_ID INT,
+Course_ID INT,
+FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+)
+
 --Insert into student
 INSERT INTO Student (StuName) VALUES ('g');
 
@@ -66,6 +75,7 @@ INSERT INTO Course(Name, Credits, Description) VALUES ('Course 4', 110, 'A cours
 INSERT INTO Course(Name, Credits, Description) VALUES ('Course 5', 30, 'A course');
 
 --Insert Into preReqGroup
+INSERT INTO PreReqCourseGroup DEFAULT VALUES;
 INSERT INTO PreReqCourseGroup DEFAULT VALUES;
 
 --Insert course group assign
@@ -82,6 +92,12 @@ INSERT INTO Course_Offering(Course_ID) VALUES (4);
 --Insert into course enrolments
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 1);
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
---INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
 
-SELECT * FROM Course_Enrolments
+--program assign
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 1);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 2);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 3);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 4);
+
+SELECT * FROM CourseProgramAssign

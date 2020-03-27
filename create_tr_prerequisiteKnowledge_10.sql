@@ -55,6 +55,14 @@ FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
+-- CREATE TABLE Course_Prerequisites (
+
+--     Course_Prerequisites_ID INT PRIMARY KEY,
+
+--     FOREIGN KEY (Course_Prerequisites_ID) REFERENCES Course(Course_ID) ON DELETE NO ACTION,
+
+-- )
+
 --Insert into student
 INSERT INTO Student (StuName) VALUES ('g');
 

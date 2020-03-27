@@ -1,6 +1,5 @@
 --DELETE FROM Course_Enrolments WHERE CourseOffering_ID = 3;
 --DROP TRIGGER preReqTest
---INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
 --IF (select(exists(Select * from course_enrolements, preReq  where course_enrolements.student_id = student.student_id and  course_enrolements.course_ID = preReq.CourseID)))
---SELECT * FROM Course_Enrolments
 --SELECT * FROM Course_Enrolments

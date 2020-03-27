@@ -81,7 +81,7 @@ INSERT INTO PreReqCourseGroup DEFAULT VALUES;
 --Insert course group assign
 INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (1, 1);
 INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (1, 2);
-INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (1, 3);
+INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (2, 3);
 
 --Insert into course offering
 INSERT INTO Course_Offering(Course_ID) VALUES (1);
@@ -90,14 +90,14 @@ INSERT INTO Course_Offering(Course_ID) VALUES (3);
 INSERT INTO Course_Offering(Course_ID) VALUES (4);
 
 --Insert into course enrolments
-INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 1);
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 0);
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
-INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
+--INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);
 
 --program assign
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 1);
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 2);
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (2, 3);
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 4);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 1);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 2);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 3);
+--INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 4);
 
 SELECT * FROM CourseProgramAssign

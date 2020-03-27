@@ -10,12 +10,12 @@ IF (exists(select Course.Course_ID from Course where Course.Course_ID = @CourseO
 
 	-- select Course.Course_ID from Course where Course.Course_ID = @CourseOfferID
 
-    select Course_Offering.Course_ID , Course.Course_ID, GroupCourseAssign.Course_ID, PreReqCourseGroup.Group_ID from Course_Offering 
-    join Course_Enrolments on Course_Enrolments.CourseOffering_ID = Course_Offering.CourseOffering_ID
-    join Course on Course_Offering.Course_ID = Course.Course_ID
-    join GroupCourseAssign on GroupCourseAssign.Course_ID = Course.Course_ID 
-    join PreReqCourseGroup on PreReqCourseGroup.Group_ID = GroupCourseAssign.Group_ID
-    where GroupCourseAssign.Course_ID = Course.Course_ID and Course_Enrolments.Student_ID = @StudentID and Course_Enrolments.Course_Status = 1;
+    -- select Course_Offering.Course_ID , Course.Course_ID, GroupCourseAssign.Course_ID, PreReqCourseGroup.Group_ID from Course_Offering 
+    -- join Course_Enrolments on Course_Enrolments.CourseOffering_ID = Course_Offering.CourseOffering_ID
+    -- join Course on Course_Offering.Course_ID = Course.Course_ID
+    -- join GroupCourseAssign on GroupCourseAssign.Course_ID = Course.Course_ID 
+    -- join PreReqCourseGroup on PreReqCourseGroup.Group_ID = GroupCourseAssign.Group_ID
+    -- where GroupCourseAssign.Course_ID = Course.Course_ID and Course_Enrolments.Student_ID = @StudentID and Course_Enrolments.Course_Status = 1;
 
 ELSE
 

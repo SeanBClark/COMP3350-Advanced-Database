@@ -59,11 +59,11 @@ Course_ID INT,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 )
 
-CREATE TABLE Course_Enrolments ( --May need to fix this table but at the moment it stores what is needed
-CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
+CREATE TABLE Course_Enrolments ( 
 Student_ID INT,
 CourseOffering_ID INT,
 Course_Status BIT DEFAULT 0,
+PRIMARY KEY(Student_ID, CourseOffering_ID),
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
@@ -169,4 +169,4 @@ GO
 --Course 3 is assigned group ID 1, Group ID 1 contains Course ID 1 AND Course ID 2 in group course assign table which assigns course to a pre req group
 -- student ID has enroled in courses with ID 1 and 2, BUT has not completed course 1, as its status is 0
 -- the transaction should roll back and say unable to insert
-INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1); 
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);

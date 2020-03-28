@@ -18,6 +18,18 @@ CREATE PROCEDURE usp_RegisterForCourses
 
     AS
     SET NOCOUNT ON
+    
+    IF (@studentNumber = NULL)
+
+        BEGIN
+
+            RAISERROR('No Student Number Present', 12, 1);
+
+            ROLLBACK TRANSACTION;
+
+        END
+
+    ELSE
 
         INSERT INTO Course_Enrolments
             (
@@ -30,6 +42,8 @@ CREATE PROCEDURE usp_RegisterForCourses
         
         SELECT @studentNumber, 1, 0 
 		FROM @TVP;
+
+            
 
 GO
 

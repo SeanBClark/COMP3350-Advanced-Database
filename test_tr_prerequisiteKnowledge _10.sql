@@ -59,7 +59,7 @@ Course_ID INT,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 )
 
-CREATE TABLE Course_Enrolments ( --May need to fix this table but at the moment it stores what is needed
+CREATE TABLE Course_Enrolments (
 CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
 Student_ID INT,
 CourseOffering_ID INT,
@@ -107,8 +107,8 @@ INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VAL
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
 
 --program assign
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 1);
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 2);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (NULL, 1);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (NULL, 2);
 INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 3);
 
 
@@ -126,12 +126,6 @@ DECLARE @CourseOfferID INT = (SELECT CourseOffering_ID FROM inserted); --store t
 DECLARE @StudentID INT = (SELECT Student_ID FROM inserted); --store the input student ID
 DECLARE @GroupID INT = (SELECT Group_ID FROM CourseProgramAssign WHERE Course_ID = @CourseOfferID); --gathers the group ID
 
---making sure the student exists in the course enrolments
-IF NOT EXISTS (SELECT * FROM Course_Enrolments WHERE Student_ID = @StudentID)
-	BEGIN
-		RAISERROR('The Student Has Not Enroled in any courses at the university', 1, 1);
-		ROLLBACK TRANSACTION; 	
-	END
 
 -- creating a CURSOR to get all the course IDs of a specified pre requiste group ID
 DECLARE courseCollect CURSOR
@@ -175,4 +169,4 @@ GO
 --Course 3 is assigned group ID 1, Group ID 1 contains Course ID 1 AND Course ID 2 in group course assign table which assigns course to a pre req group
 -- student ID has enroled in courses with ID 1 and 2, BUT has not completed course 1, as its status is 0
 -- the transaction should roll back and say unable to insert
-INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1); 
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);

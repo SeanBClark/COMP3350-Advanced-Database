@@ -1,6 +1,10 @@
-DROP PROCEDURE usp_RegisterForCourses; 
+--28/03/20
+--Aaron Moss And Sean Clark COMP3350 Advanced Databases Assignment 1
+-- Stored procedure for part 5 of assignment 1
 
-DROP TYPE CourseOfferingList;
+--DROP PROCEDURE usp_RegisterForCourses; 
+
+--DROP TYPE CourseOfferingList;
 
 CREATE  TYPE CourseOfferingList
     AS TABLE
@@ -19,6 +23,7 @@ CREATE PROCEDURE usp_RegisterForCourses
     AS
     SET NOCOUNT ON
     
+    -- Checks if student exists if not shows an error.
     IF (@studentNumber = NULL)
 
         BEGIN

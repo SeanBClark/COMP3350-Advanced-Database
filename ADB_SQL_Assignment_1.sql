@@ -1,9 +1,23 @@
-if not exists(select * from sys.databases where name = 'UniDB')
-    create database UniDB
-GO
-USE UniDB
-GO
- ----RUN THIS COMMAND IF YOU WANT TO CREATE A NEW DB TO WORK ON ^^^^^
+--28/03/20
+--Aaron Moss And Sean Clark COMP3350 Advanced Databases Assignment 1
+--In this file: Creation of tables with not nulls, checks and defaults assigned, also some standard inserts
+
+
+--USE THIS STATEMENT TO CREATE USE STANDARD DB ENVIRONMENT TO RUN IF YOU WOULD LIKE
+
+--if not exists(select * from sys.databases where name = 'UniDB')
+--    create database UniDB
+--GO
+--USE UniDB
+--GO
+
+
+--TOGGLE NO COUNT ON OR OFF
+--GO
+  --You Can toggle between on an off to view rows affected
+  --SET NOCOUNT ON;
+  --SET NOCOUNT OFF;
+--GO
 
 DROP TABLE Course_Enrolments
 DROP TABLE Timetable_Info
@@ -62,9 +76,9 @@ Additional_Number_2 VARCHAR(30)
 
 CREATE TABLE Student (
 Student_ID INT PRIMARY KEY IDENTITY(1,1),
-Name_ID INT UNIQUE, --can uniquely identify each student member by name
-Address_ID INT, --May live in the same house, does not have to be unique
-Contact_ID INT UNIQUE, --Student must have contact number unique to them
+Name_ID INT UNIQUE NOT NULL, --can uniquely identify each student member by name
+Address_ID INT NOT NULL, --May live in the same house, does not have to be unique
+Contact_ID INT UNIQUE NOT NULL, --Student must have contact number unique to them
 FOREIGN KEY (Name_ID) REFERENCES Name(Name_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Contact_ID) REFERENCES Contact_Number(Contact_ID) ON UPDATE CASCADE ON DELETE NO ACTION
@@ -72,9 +86,9 @@ FOREIGN KEY (Contact_ID) REFERENCES Contact_Number(Contact_ID) ON UPDATE CASCADE
 
 CREATE TABLE Staff (
 Staff_ID INT PRIMARY KEY IDENTITY(1,1),
-Name_ID INT UNIQUE, --can uniquely identify each staff member by name
-Address_ID INT, --May live in the same house, does not have to be unique
-Contact_ID INT UNIQUE,
+Name_ID INT UNIQUE NOT NULL, --can uniquely identify each staff member by name
+Address_ID INT NOT NULL, --May live in the same house, does not have to be unique
+Contact_ID INT UNIQUE NOT NULL,
 FOREIGN KEY (Name_ID) REFERENCES Name(Name_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Address_ID) REFERENCES Address(Address_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Contact_ID) REFERENCES Contact_Number(Contact_ID) ON UPDATE CASCADE ON DELETE NO ACTION
@@ -109,7 +123,7 @@ Org_ContactNumber CHAR(10) --Each org unit has a contact number that is 10 units
 
 CREATE TABLE SubOrganisation_Unit (
 SubOrganisation_ID INT PRIMARY KEY IDENTITY(1,1),
-Organisation_ID INT,
+Organisation_ID INT NOT NULL,
 SubOrg_Name VARCHAR(100) NOT NULL,
 SubOrg_Description TEXT,
 SubOrg_ContactNumber CHAR(10) --Each sub org unit has a contact number that is 10 units long
@@ -118,8 +132,8 @@ FOREIGN KEY (Organisation_ID) REFERENCES Organisation_Unit(Organisation_ID) ON U
 
 CREATE TABLE Organisational_Unit_Register (
 OrgReg_ID INT PRIMARY KEY IDENTITY(1,1),
-Staff_ID INT,
-Organisation_ID INT,
+Staff_ID INT NOT NULL,
+Organisation_ID INT NOT NULL,
 StartDate DATE NOT NULL,
 EndDate DATE,
 Role_Played VARCHAR(75) NOT NULL,
@@ -135,13 +149,14 @@ Year INT NOT NULL
 
 CREATE TABLE Program (
 Program_ID INT PRIMARY KEY IDENTITY,
-Organisation_ID INT,
+Organisation_ID INT NOT NULL,
 Program_Code CHAR(8) NOT NULL, --Must be 8 characters long and be formed as such: ABCD1234
 Prog_Name VARCHAR(80) UNIQUE NOT NULL,
 Total_Credits INT NOT NULL,
 Prog_Level VARCHAR(30) NOT NULL, --Contains Certificate, Bachelor, masters, phd
 Cert_Achieved VARCHAR(20) NOT NULL, --Bsc, PHD, Msc
-FOREIGN KEY (Organisation_ID) REFERENCES Organisation_Unit(Organisation_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY (Organisation_ID) REFERENCES Organisation_Unit(Organisation_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+CHECK (Prog_Level IN ('Certificate', 'Bachelor', 'Masters', 'PhD')),
 )
 
 CREATE TABLE Program_Convenor_Assign ( --Table used for assigning a program convenor to a program, will match a convenor code, with a program code
@@ -154,9 +169,9 @@ FOREIGN KEY (Staff_ID) REFERENCES Program_Convenor(Staff_ID) ON UPDATE CASCADE O
 
 CREATE TABLE Student_Enrolments (
 ProgramEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
-Student_ID INT,
-Program_ID INT,
-SemTriSem_ID INT,
+Student_ID INT NOT NULL,
+Program_ID INT NOT NULL,
+SemTriSem_ID INT NOT NULL,
 StartDate DATE NOT NULL,
 EndDate DATE,
 Status VARCHAR(30) NOT NULL DEFAULT 'In Progress',
@@ -187,20 +202,21 @@ FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE 
 
 CREATE TABLE CourseProgramAssign ( --this keeps track of a course assigned to a program, group PK references the pre reqs for the course
 CourseProgID INT PRIMARY KEY IDENTITY(1,1),
-Group_ID INT,
-Course_ID INT,
-Program_ID INT,
+Group_ID INT, --can be null as a course may have 0 pre reqs
+Course_ID INT NOT NULL,
+Program_ID INT NOT NULL,
 StartDate DATE NOT NULL,
 EndDate DATE,
 Course_Type VARCHAR(30) NOT NULL, --can be core, directed or compulsory for example
 FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
-FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
+CHECK (Course_Type IN ('Core', 'Directed', 'Compulsory')),
 )
 
 CREATE TABLE Major (
-Major_ID INT PRIMARY KEY IDENTITY(1,1),
-Course_ID INT, --what course is it a major of?
+Course_ID INT PRIMARY KEY, 
+MajorCode INT NOT NULL,
 MajorName VARCHAR(80) UNIQUE NOT NULL,
 Description TEXT,
 Total_Credits INT NOT NULL, --total credits to complete major
@@ -209,8 +225,8 @@ FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE
 )
 
 CREATE TABLE Minor (
-Minor_ID INT PRIMARY KEY IDENTITY(1,1),
-Course_ID INT, --what course is it a minor of?
+Course_ID INT PRIMARY KEY,
+Minor_Code INT UNIQUE NOT NULL,
 MinorName VARCHAR(80) UNIQUE NOT NULL,
 Description TEXT,
 Total_Credits INT NOT NULL, --total credits to complete minor
@@ -235,7 +251,7 @@ FOREIGN KEY (Campus_ID) REFERENCES Campus(Campus_ID) ON UPDATE CASCADE ON DELETE
 
 CREATE TABLE Facilities (
 Facility_ID INT PRIMARY KEY IDENTITY(1,1),
-Building_ID INT,
+Building_ID INT NOT NULL,
 Room_No INT NOT NULL,
 Capacity INT NOT NULL,
 Type VARCHAR(100) NOT NULL, --Lab, Lecture hall........
@@ -244,9 +260,9 @@ FOREIGN KEY (Building_ID) REFERENCES Building(Building_ID) ON UPDATE CASCADE ON 
 
 CREATE TABLE Course_Offering (
 CourseOffering_ID INT PRIMARY KEY IDENTITY(1,1),
-Course_ID INT,
-Staff_ID INT,
-SemTriSem_ID INT,
+Course_ID INT NOT NULL,
+Staff_ID INT NOT NULL, --the coordinator
+SemTriSem_ID INT NOT NULL,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Staff_ID) REFERENCES Course_Coordinator(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -254,8 +270,8 @@ FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE
 
 CREATE TABLE Timetable_Info ( --the facilitie outlines what campus a course offering is carried out
 Timetable_ID INT PRIMARY KEY IDENTITY(1,1),
-CourseOffering_ID INT,
-Facility_ID INT,
+CourseOffering_ID INT NOT NULL,
+Facility_ID INT NOT NULL,
 Start_Time TIME,
 End_Time TIME,
 Date DATE,
@@ -265,9 +281,9 @@ FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON
 
 CREATE TABLE Course_Enrolments ( 
 CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
-Student_ID INT,
-CourseOffering_ID INT,
-Date_Registered DATE,
+Student_ID INT NOT NULL,
+CourseOffering_ID INT NOT NULL,
+Date_Registered DATE DEFAULT GETDATE(),
 Final_Mark INT,
 Final_Grade VARCHAR(2), --HD, D, C....
 Course_Status BIT DEFAULT 0, --this will only change to a 1 if the student has successfully completed the course, 0 if student failed, dropped out....
@@ -355,10 +371,10 @@ INSERT INTO CourseProgramAssign (Group_ID, Course_ID, Program_ID, StartDate, Cou
 INSERT INTO CourseProgramAssign (Group_ID, Course_ID, Program_ID, StartDate, Course_Type) VALUES (1, 3, 1, '2020-09-02', 'core');
 -----------------------------------------------------------------
 
-INSERT INTO Major (Course_ID, MajorName, Total_Credits, Conditions) VALUES (1, 'Major', 100, 'Condition');
+INSERT INTO Major (Course_ID, MajorCode, MajorName, Total_Credits, Conditions) VALUES (2, 123, 'Major course', 120, 'con');
 -----------------------------------------------------------------
 
-INSERT INTO Minor (Course_ID, MinorName, Total_Credits, Conditions) VALUES (4, 'Minor', 100, 'Condition');
+INSERT INTO Minor (Course_ID, Minor_Code, MinorName, Total_Credits, Conditions) VALUES(1, 1001, 'Minor', 100, 'Condition');
 -----------------------------------------------------------------
 
 INSERT INTO Campus (Campus_Name, City, Country) VALUES ('Campus', 'Cityville', 'Countryville');

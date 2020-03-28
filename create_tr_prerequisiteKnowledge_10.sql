@@ -5,11 +5,11 @@
 
 --USE THIS STATEMENT TO CREATE USE STANDARD DB ENVIRONMENT TO RUN IF YOU WOULD LIKE
 
-if not exists(select * from sys.databases where name = 'UniDB')
-    create database UniDB
-GO
-USE UniDB
-GO
+--if not exists(select * from sys.databases where name = 'UniDB')
+--    create database UniDB
+--GO
+--USE UniDB
+--GO
 
 --trigger to determine whether or not a student can enrol in a course based on pre requisites
 CREATE TRIGGER preReqTest

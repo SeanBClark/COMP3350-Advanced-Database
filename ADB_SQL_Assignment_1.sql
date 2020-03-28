@@ -270,6 +270,7 @@ CourseOffering_ID INT,
 Date_Registered DATE,
 Final_Mark INT,
 Final_Grade VARCHAR(2), --HD, D, C....
+Course_Status BIT DEFAULT 0, --this will only change to a 1 if the student has successfully completed the course, 0 if student failed, dropped out....
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )

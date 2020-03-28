@@ -1,1 +1,0 @@
-insert into Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) values (1, 1, 0)

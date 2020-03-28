@@ -92,12 +92,12 @@ FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO
 
 CREATE TABLE Course_Coordinator (
 Staff_ID INT PRIMARY KEY,
-FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY (Staff_ID) REFERENCES Academic_Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
 CREATE TABLE Program_Convenor (
 Staff_ID INT PRIMARY KEY,
-FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY (Staff_ID) REFERENCES Academic_Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
 CREATE TABLE Organisation_Unit (
@@ -140,7 +140,7 @@ Program_Code CHAR(8) NOT NULL, --Must be 8 characters long and be formed as such
 Prog_Name VARCHAR(80) UNIQUE NOT NULL,
 Total_Credits INT NOT NULL,
 Prog_Level VARCHAR(30) NOT NULL, --Contains Certificate, Bachelor, masters, phd
-Cert_Achieved VARCHAR(20) NOT NULL,
+Cert_Achieved VARCHAR(20) NOT NULL, --Bsc, PHD, Msc
 FOREIGN KEY (Organisation_ID) REFERENCES Organisation_Unit(Organisation_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
@@ -173,7 +173,7 @@ Description TEXT NOT NULL
 )
 
 CREATE TABLE PreReqCourseGroup ( -- Holds a number, which will be an ID of a group that holds mutliple courses that are pre requisites for another course
-Group_ID INT PRIMARY KEY
+Group_ID INT PRIMARY KEY IDENTITY (1,1)
 )
 
 CREATE TABLE GroupCourseAssign ( --takes a groupID and a courseID, a group has many courses a part of it, this table allows us to reference what courses a groupID Holds
@@ -187,15 +187,15 @@ FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE 
 
 CREATE TABLE CourseProgramAssign ( --this keeps track of a course assigned to a program, group PK references the pre reqs for the course
 CourseProgID INT PRIMARY KEY IDENTITY(1,1),
+Group_ID INT,
 Course_ID INT,
 Program_ID INT,
-Group_ID INT,
 StartDate DATE NOT NULL,
 EndDate DATE,
-Course_Type VARCHAR(30), --can be core, directed or compulsory for example
+Course_Type VARCHAR(30) NOT NULL, --can be core, directed or compulsory for example
+FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
-FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
-FOREIGN KEY (Group_ID) REFERENCES PreReqCourseGroup(Group_ID) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
 CREATE TABLE Major (
@@ -263,7 +263,7 @@ FOREIGN KEY (Facility_ID) REFERENCES Facilities(Facility_ID) ON UPDATE CASCADE O
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Course_Enrolments ( --May need to fix this table but at the moment it stores what is needed
+CREATE TABLE Course_Enrolments ( 
 CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
 Student_ID INT,
 CourseOffering_ID INT,
@@ -274,3 +274,111 @@ Course_Status BIT DEFAULT 0, --this will only change to a 1 if the student has s
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
+
+--------------------------------SAMPLE DATA INPUT--------------------------------------------------
+-----------------------------------------------------------------
+INSERT INTO Name (First_Name, Last_Name) VALUES ('John', 'Fake');
+INSERT INTO Name (First_Name, Last_Name) VALUES ('Simon', 'Fake');
+INSERT INTO Name (First_Name, Last_Name) VALUES ('Paul', 'Fake');
+-----------------------------------------------------------------
+
+INSERT INTO Address (Street_No, Street, City, Post_Code, State, Country) VALUES ('12', 'Street Lane', 'City', '2307', 'NSW', 'Australia');
+INSERT INTO Address (Street_No, Street, City, Post_Code, State, Country) VALUES ('34', 'Tree Street', 'City', '2307', 'NSW', 'Australia');
+INSERT INTO Address (Street_No, Street, City, Post_Code, State, Country) VALUES ('49', 'Bush Way', 'City', '2307', 'NSW', 'Australia');
+-----------------------------------------------------------------
+
+INSERT INTO Contact_Number (Home_Number, Mobile_Number) VALUES ('3456 7890', '0438 239 334');
+INSERT INTO Contact_Number (Home_Number, Mobile_Number) VALUES ('2356 3948', '0458 555 883');
+INSERT INTO Contact_Number (Home_Number, Mobile_Number) VALUES ('9806 4498', '0478 392 130');
+-----------------------------------------------------------------
+
+INSERT INTO Student (Name_ID, Address_ID, Contact_ID) VALUES (1, 1, 1);
+-----------------------------------------------------------------
+
+INSERT INTO Staff (Name_ID, Address_ID, Contact_ID) VALUES (2, 2, 2);
+INSERT INTO Staff (Name_ID, Address_ID, Contact_ID) VALUES (3, 3, 3);
+-----------------------------------------------------------------
+
+INSERT INTO Admin_Staff (Staff_ID) VALUES (1);
+-----------------------------------------------------------------
+
+INSERT INTO Academic_Staff (Staff_ID) VALUES (2);-----------------------------------------------------------------
+
+INSERT INTO Course_Coordinator (Staff_ID) VALUES (2);
+-----------------------------------------------------------------
+
+INSERT INTO Program_Convenor (Staff_ID) VALUES (2);
+-----------------------------------------------------------------
+
+INSERT INTO Organisation_Unit (Organisation_Name) VALUES ('Faculty of Electrical Engineering');
+-----------------------------------------------------------------
+
+INSERT INTO SubOrganisation_Unit (Organisation_ID, SubOrg_Name) VALUES (1, 'School of Computing and IT');
+-----------------------------------------------------------------
+
+INSERT INTO Organisational_Unit_Register (Staff_ID, Organisation_ID, StartDate, Role_Played) VALUES (2, 1, '2020-09-02', 'Lecturer');
+-----------------------------------------------------------------
+
+INSERT INTO Semester_Trimester (Name, Year) VALUES ('Sem1-2020', '2020');
+-----------------------------------------------------------------
+
+INSERT INTO Program (Organisation_ID, Program_Code, Prog_Name, Total_Credits, Prog_Level, Cert_Achieved) VALUES (1, 'PROG1234', 'Program', 10, 'PHD', 'PHD');
+-----------------------------------------------------------------
+
+INSERT INTO Program_Convenor_Assign (Program_ID, Staff_ID) VALUES (1, 2);
+-----------------------------------------------------------------
+
+INSERT INTO Student_Enrolments (Student_ID, Program_ID, SemTriSem_ID, StartDate) VALUES (1, 1, 1, '2020-09-02');
+-----------------------------------------------------------------
+
+
+INSERT INTO Course(Name, Credits, Description) VALUES ('Course 1', 120, 'A course');
+INSERT INTO Course(Name, Credits, Description) VALUES ('Course 2', 100, 'B course');
+INSERT INTO Course(Name, Credits, Description) VALUES ('Course 3', 40, 'C course');
+INSERT INTO Course(Name, Credits, Description) VALUES ('Course 4', 110, 'D course');
+INSERT INTO Course(Name, Credits, Description) VALUES ('Course 5', 30, 'E course');
+-----------------------------------------------------------------
+
+
+INSERT INTO PreReqCourseGroup DEFAULT VALUES;
+INSERT INTO PreReqCourseGroup DEFAULT VALUES;
+-----------------------------------------------------------------
+
+
+INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (1, 1);
+INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (1, 2);
+INSERT INTO GroupCourseAssign(Group_ID, Course_ID) VALUES (2, 3);
+-----------------------------------------------------------------
+
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID, Program_ID, StartDate, Course_Type) VALUES (NULL, 1, 1, '2020-09-02', 'core');
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID, Program_ID, StartDate, Course_Type) VALUES (NULL, 2, 1, '2020-09-02', 'core');
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID, Program_ID, StartDate, Course_Type) VALUES (1, 3, 1, '2020-09-02', 'core');
+-----------------------------------------------------------------
+
+INSERT INTO Major (Course_ID, MajorName, Total_Credits, Conditions) VALUES (1, 'Major', 100, 'Condition');
+-----------------------------------------------------------------
+
+INSERT INTO Minor (Course_ID, MinorName, Total_Credits, Conditions) VALUES (4, 'Minor', 100, 'Condition');
+-----------------------------------------------------------------
+
+INSERT INTO Campus (Campus_Name, City, Country) VALUES ('Campus', 'Cityville', 'Countryville');
+-----------------------------------------------------------------
+
+INSERT INTO Building (Campus_ID, Building_Name, Location) VALUES (1, 'Big Building', 'West side');
+-----------------------------------------------------------------
+
+INSERT INTO Facilities (Building_ID, Room_No, Capacity, Type) VALUES (1, 1, 100, 'Lab');
+-----------------------------------------------------------------
+
+INSERT INTO Course_Offering(Course_ID, Staff_ID, SemTriSem_ID) VALUES (1, 2, 1);
+INSERT INTO Course_Offering(Course_ID, Staff_ID, SemTriSem_ID) VALUES (2, 2, 1);
+INSERT INTO Course_Offering(Course_ID, Staff_ID, SemTriSem_ID) VALUES (3, 2, 1);
+INSERT INTO Course_Offering(Course_ID, Staff_ID, SemTriSem_ID) VALUES (4, 2, 1);
+-----------------------------------------------------------------
+
+INSERT INTO Timetable_Info(CourseOffering_ID, Facility_ID) VALUES (1, 1);
+-----------------------------------------------------------------
+
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 0); 
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
+-----------------------------------------------------------------

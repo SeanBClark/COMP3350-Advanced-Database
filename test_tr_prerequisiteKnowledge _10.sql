@@ -107,8 +107,8 @@ INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VAL
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
 
 --program assign
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 1);
-INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 2);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (NULL, 1);
+INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (NULL, 2);
 INSERT INTO CourseProgramAssign (Group_ID, Course_ID) VALUES (1, 3);
 
 
@@ -126,12 +126,6 @@ DECLARE @CourseOfferID INT = (SELECT CourseOffering_ID FROM inserted); --store t
 DECLARE @StudentID INT = (SELECT Student_ID FROM inserted); --store the input student ID
 DECLARE @GroupID INT = (SELECT Group_ID FROM CourseProgramAssign WHERE Course_ID = @CourseOfferID); --gathers the group ID
 
---making sure the student exists in the course enrolments
-IF NOT EXISTS (SELECT * FROM Course_Enrolments WHERE Student_ID = @StudentID)
-	BEGIN
-		RAISERROR('The Student Has Not Enroled in any courses at the university', 1, 1);
-		ROLLBACK TRANSACTION; 	
-	END
 
 -- creating a CURSOR to get all the course IDs of a specified pre requiste group ID
 DECLARE courseCollect CURSOR

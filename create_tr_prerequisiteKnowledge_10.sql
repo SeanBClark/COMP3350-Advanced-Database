@@ -1,8 +1,6 @@
 --28/03/20
 --Aaron Moss And Sean Clark COMP3350 Advanced Databases Assignment 1
---In this file: Tables to set up a testenvironment for the trigger, Inserts to test the trigger and a Trigger
---NOTE: IF YOU WOULD LIKE TO CHANGE THE OUTCOME, NAVIGATE TO:
---COURSE ENROLMENTS INSERT (LINE 106) AND CHANGE THE STATUS TO 1 TO HAVE A SUCCESSFUL OUTPUT
+--In this file: A trigger to verify course pre reqs are met
 
 
 --USE THIS STATEMENT TO CREATE USE STANDARD DB ENVIRONMENT TO RUN IF YOU WOULD LIKE
@@ -24,13 +22,6 @@ DECLARE @TempCourseID INT;
 DECLARE @CourseOfferID INT = (SELECT CourseOffering_ID FROM inserted); --store the input course offer val
 DECLARE @StudentID INT = (SELECT Student_ID FROM inserted); --store the input student ID
 DECLARE @GroupID INT = (SELECT Group_ID FROM CourseProgramAssign WHERE Course_ID = @CourseOfferID); --gathers the group ID
-
---making sure the student exists in the course enrolments
-IF NOT EXISTS (SELECT * FROM Course_Enrolments WHERE Student_ID = @StudentID)
-	BEGIN
-		RAISERROR('The Student Has Not Enroled in any courses at the university', 1, 1);
-		ROLLBACK TRANSACTION; 	
-	END
 
 -- creating a CURSOR to get all the course IDs of a specified pre requiste group ID
 DECLARE courseCollect CURSOR

@@ -264,13 +264,13 @@ FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON
 )
 
 CREATE TABLE Course_Enrolments ( 
+CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
 Student_ID INT,
 CourseOffering_ID INT,
 Date_Registered DATE,
 Final_Mark INT,
 Final_Grade VARCHAR(2), --HD, D, C....
 Course_Status BIT DEFAULT 0, --this will only change to a 1 if the student has successfully completed the course, 0 if student failed, dropped out....
-PRIMARY KEY(Student_ID, CourseOffering_ID),
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
@@ -379,6 +379,6 @@ INSERT INTO Course_Offering(Course_ID, Staff_ID, SemTriSem_ID) VALUES (4, 2, 1);
 INSERT INTO Timetable_Info(CourseOffering_ID, Facility_ID) VALUES (1, 1);
 -----------------------------------------------------------------
 
-INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 1); 
+INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 1, 0); 
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 2, 1);
 -----------------------------------------------------------------

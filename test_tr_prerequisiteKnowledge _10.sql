@@ -59,11 +59,11 @@ Course_ID INT,
 FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 )
 
-CREATE TABLE Course_Enrolments ( 
+CREATE TABLE Course_Enrolments (
+CourseEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
 Student_ID INT,
 CourseOffering_ID INT,
 Course_Status BIT DEFAULT 0,
-PRIMARY KEY(Student_ID, CourseOffering_ID),
 FOREIGN KEY (CourseOffering_ID) REFERENCES Course_Offering(CourseOffering_ID) ON DELETE NO ACTION,
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )

@@ -10,7 +10,7 @@ DECLARE @StudentID INT = (SELECT Student_ID FROM inserted); --store the input st
 DECLARE @GroupID INT = (SELECT Group_ID FROM CourseProgramAssign WHERE Course_ID = @CourseOfferID); --gathers the group ID
 
 DECLARE courseCollect CURSOR
-FOR 
+FOR
 SELECT Course_ID
 FROM GroupCourseAssign
 WHERE Group_ID = @GroupID
@@ -35,8 +35,24 @@ CLOSE courseCollect
 IF @Result > 0
 	BEGIN
 		RAISERROR('Unable To Insert, Course Requirements Not Met', 1, 1);
-		ROLLBACK TRANSACTION; 
+		ROLLBACK TRANSACTION;
 	END
+
+END
+
+--DECLARE @ex INT = 1; --test purposes
+----BEGIN
+--IF @ex = 1
+--	BEGIN
+--		PRINT(@CourseOfferID);
+--		PRINT(@StudentID);
+--	END
+--ELSE
+--	BEGIN
+--		RAISERROR('no insert', 1, 1);
+--		ROLLBACK TRANSACTION;
+--	END
+----END
 
 DEALLOCATE courseCollect
 
@@ -51,5 +67,5 @@ END
 --ELSE
 --	BEGIN
 --		RAISERROR('no insert', 1, 1);
---		ROLLBACK TRANSACTION; 
+--		ROLLBACK TRANSACTION;
 --	END

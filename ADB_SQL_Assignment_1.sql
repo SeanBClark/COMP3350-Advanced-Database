@@ -43,7 +43,7 @@ Last_Name VARCHAR(40) NOT NULL
 
 CREATE TABLE Address (
 Address_ID INT PRIMARY KEY IDENTITY(1,1),
-Street_No INT NOT NULL,
+Street_No VARCHAR(10) NOT NULL, --VARCHAR type as you can have 17A for example
 Street VARCHAR(70) NOT NULL,
 City VARCHAR(50) NOT NULL,
 Post_Code VARCHAR(6) NOT NULL,

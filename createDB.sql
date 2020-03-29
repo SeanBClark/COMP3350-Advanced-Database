@@ -104,12 +104,12 @@ Staff_ID INT PRIMARY KEY,
 FOREIGN KEY (Staff_ID) REFERENCES Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Course_Coordinator (
+CREATE TABLE Course_Coordinator ( --must reference back to Academic staff table as only academic staff can be a course coordinator
 Staff_ID INT PRIMARY KEY,
 FOREIGN KEY (Staff_ID) REFERENCES Academic_Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Program_Convenor (
+CREATE TABLE Program_Convenor ( --must reference back to Academic staff table as only academic staff can be a program convenor
 Staff_ID INT PRIMARY KEY,
 FOREIGN KEY (Staff_ID) REFERENCES Academic_Staff(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
@@ -118,7 +118,7 @@ CREATE TABLE Organisation_Unit (
 Organisation_ID INT PRIMARY KEY IDENTITY(1,1),
 Organisation_Name VARCHAR(100) NOT NULL,
 Org_Description TEXT,
-Org_ContactNumber CHAR(10) --Each org unit has a contact number that is 10 units long
+Org_ContactNumber CHAR(10) UNIQUE NOT NULL --Each org unit must have a contact number that is 10 units long
 )
 
 CREATE TABLE SubOrganisation_Unit (
@@ -130,7 +130,7 @@ SubOrg_ContactNumber CHAR(10) --Each sub org unit has a contact number that is 1
 FOREIGN KEY (Organisation_ID) REFERENCES Organisation_Unit(Organisation_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Organisational_Unit_Register (
+CREATE TABLE Organisational_Unit_Register ( --this table allows a staff member to be associated with an organisation unit, with start and end date and role played
 OrgReg_ID INT PRIMARY KEY IDENTITY(1,1),
 Staff_ID INT NOT NULL,
 Organisation_ID INT NOT NULL,
@@ -167,7 +167,7 @@ FOREIGN KEY (Program_ID) REFERENCES Program(Program_ID) ON UPDATE CASCADE ON DEL
 FOREIGN KEY (Staff_ID) REFERENCES Program_Convenor(Staff_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
 
-CREATE TABLE Student_Enrolments (
+CREATE TABLE Student_Enrolments ( --enrolling a student to a program in a particular semester or trimester
 ProgramEnrol_ID INT PRIMARY KEY IDENTITY(1,1),
 Student_ID INT NOT NULL,
 Program_ID INT NOT NULL,
@@ -244,7 +244,7 @@ Country VARCHAR(70) NOT NULL
 CREATE TABLE Building (
 Building_ID INT PRIMARY KEY IDENTITY(1,1),
 Campus_ID INT,
-Building_Name VARCHAR(70) NOT NULL,
+Building_Name VARCHAR(70) NOT NULL UNIQUE,
 Location VARCHAR(50) NOT NULL, --west side, east side....
 FOREIGN KEY (Campus_ID) REFERENCES Campus(Campus_ID) ON UPDATE CASCADE ON DELETE NO ACTION
 )
@@ -268,7 +268,7 @@ FOREIGN KEY (Staff_ID) REFERENCES Course_Coordinator(Staff_ID) ON UPDATE CASCADE
 FOREIGN KEY (SemTriSem_ID) REFERENCES Semester_Trimester(SemTriSem_ID) ON UPDATE CASCADE ON DELETE NO ACTION,
 )
 
-CREATE TABLE Timetable_Info ( --the facilitie outlines what campus a course offering is carried out
+CREATE TABLE Timetable_Info ( --the facilities outlines what campus a course offering is carried out
 Timetable_ID INT PRIMARY KEY IDENTITY(1,1),
 CourseOffering_ID INT NOT NULL,
 Facility_ID INT NOT NULL,
@@ -318,7 +318,8 @@ INSERT INTO Staff (Name_ID, Address_ID, Contact_ID) VALUES (3, 3, 3);
 INSERT INTO Admin_Staff (Staff_ID) VALUES (1);
 -----------------------------------------------------------------
 
-INSERT INTO Academic_Staff (Staff_ID) VALUES (2);-----------------------------------------------------------------
+INSERT INTO Academic_Staff (Staff_ID) VALUES (2);
+-----------------------------------------------------------------
 
 INSERT INTO Course_Coordinator (Staff_ID) VALUES (2);
 -----------------------------------------------------------------
@@ -326,7 +327,7 @@ INSERT INTO Course_Coordinator (Staff_ID) VALUES (2);
 INSERT INTO Program_Convenor (Staff_ID) VALUES (2);
 -----------------------------------------------------------------
 
-INSERT INTO Organisation_Unit (Organisation_Name) VALUES ('Faculty of Electrical Engineering');
+INSERT INTO Organisation_Unit (Organisation_Name, Org_ContactNumber) VALUES ('Faculty of Electrical Engineering', 0429334589);
 -----------------------------------------------------------------
 
 INSERT INTO SubOrganisation_Unit (Organisation_ID, SubOrg_Name) VALUES (1, 'School of Computing and IT');

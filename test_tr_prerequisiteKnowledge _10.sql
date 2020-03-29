@@ -169,4 +169,5 @@ GO
 --Course 3 is assigned group ID 1, Group ID 1 contains Course ID 1 AND Course ID 2 in group course assign table which assigns course to a pre req group
 -- student ID has enroled in courses with ID 1 and 2, BUT has not completed course 1, as its status is 0
 -- the transaction should roll back and say unable to insert
+-- LINE 106
 INSERT INTO Course_Enrolments (Student_ID, CourseOffering_ID, Course_Status) VALUES (1, 3, 1);

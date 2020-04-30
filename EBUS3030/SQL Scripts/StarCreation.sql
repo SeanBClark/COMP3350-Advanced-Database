@@ -1,0 +1,8 @@
+--DROP TABLE
+
+DROP TABLE FactSale
+DROP TABLE DimCustomer
+DROP TABLE DimStaff
+DROP TABLE DimHistoricalItemPrice
+DROP TABLE DimItem
+DROP TABLE DimReciept

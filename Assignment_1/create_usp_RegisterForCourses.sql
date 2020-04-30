@@ -4,7 +4,7 @@
 
 --DROP PROCEDURE usp_RegisterForCourses; 
 
---DROP TYPE CourseOfferingList;
+---DROP TYPE CourseOfferingList;
 
 CREATE  TYPE CourseOfferingList
     AS TABLE
@@ -41,11 +41,14 @@ CREATE PROCEDURE usp_RegisterForCourses
 
                 Student_ID,
                 CourseOffering_ID,
-                Course_Status
+				Date_Registered,
+				Final_Mark,
+				Final_Grade,
+				Course_Status
 
             )
         
-        SELECT @studentNumber, 1, 0 
+        SELECT @studentNumber, 1, GETDATE(), 80, 'A', 0 
 		FROM @TVP;
 
             

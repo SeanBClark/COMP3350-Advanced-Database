@@ -422,7 +422,9 @@ ORDER BY year(Fact.Sale.[Invoice Date Key])</CommandText>
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Yearly_Sales.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'0.00;('$'0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -438,6 +440,7 @@ ORDER BY year(Fact.Sale.[Invoice Date Key])</CommandText>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>en-AU</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>

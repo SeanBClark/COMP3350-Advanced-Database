@@ -6,10 +6,37 @@
     <Name>Assignment2_10_Datamarts.database</Name>
     <FullPath>Assignment2_10_Datamarts.database</FullPath>
   </Database>
+  <DataSources>
+    <ProjectItem>
+      <Name>Wide World Importers DW.ds</Name>
+      <FullPath>Wide World Importers DW.ds</FullPath>
+    </ProjectItem>
+  </DataSources>
+  <DataSourceViews>
+    <ProjectItem>
+      <Name>Wide World Importers DW.dsv</Name>
+      <FullPath>Wide World Importers DW.dsv</FullPath>
+    </ProjectItem>
+  </DataSourceViews>
   <Configurations>
     <Configuration>
       <Name>Development</Name>
-      <Options />
+      <Options>
+        <ConnectionMappings>
+          <ConfigurationSetting>
+            <Id>Wide World Importers DW</Id>
+            <Name>Wide World Importers DW</Name>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=DESKTOP-IGVE1AK\SQLEXPRESS;Integrated Security=SSPI;Initial Catalog=WideWorldImportersDW</Value>
+          </ConfigurationSetting>
+        </ConnectionMappings>
+        <ConnectionSecurityMappings>
+          <ConfigurationSetting>
+            <Id>Wide World Importers DW</Id>
+            <Name>Wide World Importers DW</Name>
+            <Value xsi:type="xsd:int">0</Value>
+          </ConfigurationSetting>
+        </ConnectionSecurityMappings>
+      </Options>
     </Configuration>
   </Configurations>
 </Project>

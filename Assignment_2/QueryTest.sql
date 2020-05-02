@@ -54,6 +54,19 @@ select top 10 count(Fact.Sale.[Customer Key]) as [Least Sales], Dimension.Custom
 	order by count(Fact.Sale.[Customer Key]) asc;
 
 
+SELECT DISTINCT TOP 10 COUNT(fs.[Salesperson Key]) as AmountOfItemsSold, e.Employee as EmployeeName, e.[Preferred Name] as PreferredName, CONVERT(DATE, e.[Valid From]) AS ValidFrom, CONVERT(DATE, e.[Valid To]) AS ValidTo
+FROM Fact.Sale fs, Dimension.Employee e
+WHERE fs.[Salesperson Key] = e.[Employee Key]
+Group by fs.[Salesperson Key], e.Employee, e.[Preferred Name], e.[Valid From], e.[Valid To]
+ORDER BY AmountOfItemsSold DESC
+
+SELECT DISTINCT TOP 10 COUNT(fs.[Salesperson Key]) as AmountOfItemsSold, e.Employee as EmployeeName, e.[Preferred Name] as PreferredName, CONVERT(DATE, e.[Valid From]) AS ValidFrom, CONVERT(DATE, e.[Valid To]) AS ValidTo
+FROM Fact.Sale fs, Dimension.Employee e
+WHERE fs.[Salesperson Key] = e.[Employee Key]
+Group by fs.[Salesperson Key], e.Employee, e.[Preferred Name], e.[Valid From], e.[Valid To]
+ORDER BY AmountOfItemsSold ASC
+
+
 
 SELECT * FROM Fact.Sale
 

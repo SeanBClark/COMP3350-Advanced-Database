@@ -3,7 +3,7 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <TargetServer>localhost</TargetServer>
+        <TargetServer>DESKTOP-IGVE1AK\SQLEXPRESS</TargetServer>
         <TargetDatabase>Assignment2_10_Datamarts</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>

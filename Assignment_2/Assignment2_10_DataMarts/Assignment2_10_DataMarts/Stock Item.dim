@@ -1,0 +1,471 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="f17b59fd-9fad-413c-bc92-094903cdcc79" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Stock Item</ID>
+  <Name>Stock Item</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="51b70b82-b213-4ec4-9d82-ddb9d73619cd">
+    <DataSourceViewID>Wide World Importers View</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="e6fdcca1-86d9-4b34-b45a-e68b5273ed5e">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="ef764755-6e8e-46f0-a687-0c840297e5f1">
+      <ID>Stock Item Key</ID>
+      <Name>Stock Item Key</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f16b5b3d-1ee1-4989-b65f-2b82dc123d00">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="615fb4fd-41a1-4fef-8e56-537b50d31c7f">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Stock_x0020_Item_x0020_Key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="18c240e3-e007-45d1-81a4-a1e9c5a718f5">
+          <AttributeID>WWI Stock Item ID</AttributeID>
+          <Name>WWI Stock Item ID</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="144678a2-e79c-4119-97c9-81af094b2cee">
+          <AttributeID>Stock Item</AttributeID>
+          <Name>Stock Item</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="daa668dd-8d92-4e0c-8696-66efee3c15b3">
+          <AttributeID>Color</AttributeID>
+          <Name>Color</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="aa8881f0-f87d-403a-b7d8-060efbf6af26">
+          <AttributeID>Selling Package</AttributeID>
+          <Name>Selling Package</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="43d6096c-22e3-4490-9909-f9b83fa8a1c4">
+          <AttributeID>Buying Package</AttributeID>
+          <Name>Buying Package</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="314ae2da-582f-4ccb-a535-fc258b6ad588">
+          <AttributeID>Brand</AttributeID>
+          <Name>Brand</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="5dc5cbc1-9e41-4217-a76c-cc7cfcc16ca2">
+          <AttributeID>Size</AttributeID>
+          <Name>Size</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="cc010389-6e9c-452b-a529-e25f52f9ae50">
+          <AttributeID>Lead Time Days</AttributeID>
+          <Name>Lead Time Days</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8d849061-5143-4b5a-a0b6-15cb060923b6">
+          <AttributeID>Quantity Per Outer</AttributeID>
+          <Name>Quantity Per Outer</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="80b0f953-9b1f-45ab-99b8-f37a1f2c2bcd">
+          <AttributeID>Is Chiller Stock</AttributeID>
+          <Name>Is Chiller Stock</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="58a2e4fe-b52c-4c79-bad3-111a9053bacd">
+          <AttributeID>Barcode</AttributeID>
+          <Name>Barcode</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8deb69ff-de1a-4ddd-bcc6-5a24960ed5e9">
+          <AttributeID>Tax Rate</AttributeID>
+          <Name>Tax Rate</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="2406df2d-3484-4bc8-9145-b637e877bcfa">
+          <AttributeID>Unit Price</AttributeID>
+          <Name>Unit Price</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1dfb33c0-e38b-4111-b733-e9cb0ccd78c7">
+          <AttributeID>Recommended Retail Price</AttributeID>
+          <Name>Recommended Retail Price</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="3dbd1329-8e70-498d-925f-65326519b1bd">
+          <AttributeID>Typical Weight Per Unit</AttributeID>
+          <Name>Typical Weight Per Unit</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="bd2cbf1d-f46b-438f-b0fe-25ff3f4b7cc2">
+          <AttributeID>Photo</AttributeID>
+          <Name>Photo</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="9afca927-be83-442b-9717-1a11f491fac3">
+          <AttributeID>Valid From</AttributeID>
+          <Name>Valid From</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1c87e2a5-8274-4b21-b5af-aab9e7611841">
+          <AttributeID>Valid To</AttributeID>
+          <Name>Valid To</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1fe49d86-34ca-4187-9ab9-159537fd08d5">
+          <AttributeID>Lineage Key</AttributeID>
+          <Name>Lineage Key</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2a91372f-56fb-467e-bc22-a74faf1e8e3c">
+      <ID>WWI Stock Item ID</ID>
+      <Name>WWI Stock Item ID</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="6f126306-41d2-4816-a1f2-57642d99eadb">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="7d090d2f-b69c-48fe-8206-1cbfc96687d8">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>WWI_x0020_Stock_x0020_Item_x0020_ID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ce536c44-aaa0-4865-bf89-f918e5756d04">
+      <ID>Stock Item</ID>
+      <Name>Stock Item</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4187939a-331e-4c64-88d2-2f3b3a717f59">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b869e140-d054-4863-b422-3022985f659c">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Stock_x0020_Item</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2e94bf22-02b2-4fa6-95fb-4a6582b88094">
+      <ID>Color</ID>
+      <Name>Color</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="67957194-4dbc-4049-a173-62073f8e0000">
+          <DataType>WChar</DataType>
+          <DataSize>20</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="24527461-55e1-481e-ba51-855aa1c8af16">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Color</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="cccf4b7c-1f83-4cdf-bdb5-1a97a147b740">
+      <ID>Selling Package</ID>
+      <Name>Selling Package</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="4469501b-effd-4bc7-92ef-373d69dee0a3">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="7dafb3a7-392c-49a4-bef3-202e646291fe">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Selling_x0020_Package</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="cfd95a95-36f6-44fa-927e-54646ee68bc0">
+      <ID>Buying Package</ID>
+      <Name>Buying Package</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ec71c6ce-487d-47a4-b088-597a0973434c">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="0da7e792-a579-4fef-9cad-3ab7ddfd006f">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Buying_x0020_Package</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="3ea63a78-12c1-4233-8914-87062d9423e1">
+      <ID>Brand</ID>
+      <Name>Brand</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e5f5224f-6f84-4d68-a66f-75f151da4c1b">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="904eaf5a-9ad8-4c11-89da-2a132ab6a8f1">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Brand</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="68a2483b-59a9-4af4-8edc-4a75acf554b6">
+      <ID>Size</ID>
+      <Name>Size</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="dd557bb0-5aca-4b2e-9fce-5f7038c8f590">
+          <DataType>WChar</DataType>
+          <DataSize>20</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c6c7ec0b-240c-4f26-be50-ea8bd170a5ab">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Size</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5daac4da-47bd-4249-9b0f-bec7f738c1fc">
+      <ID>Lead Time Days</ID>
+      <Name>Lead Time Days</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c43029cb-75ca-4d45-919d-32a30cedcd7a">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8ce6dbc9-d070-47f1-a807-768fb03e2c0a">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Lead_x0020_Time_x0020_Days</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ca5c4645-159a-41f7-adf2-82405453e39d">
+      <ID>Quantity Per Outer</ID>
+      <Name>Quantity Per Outer</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="19efe2f4-bdf4-4ec9-a13c-560d8daee504">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="963287aa-f571-45ae-b467-4a5522f02214">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Quantity_x0020_Per_x0020_Outer</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="5841ca3e-3fcb-47ec-853d-a61aebd74857">
+      <ID>Is Chiller Stock</ID>
+      <Name>Is Chiller Stock</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="5dda58fe-7e36-4a71-abff-59e623f57c60">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3580b4ac-2a1c-4a25-bd28-349404e9c4a0">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Is_x0020_Chiller_x0020_Stock</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="741daf16-b151-48dd-aca3-2fc42c359478">
+      <ID>Barcode</ID>
+      <Name>Barcode</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="39096228-641b-43fb-9dda-7dbcea414ad0">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f3b64cd4-a932-44cb-b081-a660379792ec">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Barcode</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="fa905f62-fa8f-4df5-8056-6f215021948f">
+      <ID>Tax Rate</ID>
+      <Name>Tax Rate</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="8e82e445-55f2-48a3-b1a9-c5b2c6701cdf">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e658004c-0054-4224-8e10-595a30be1593">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Tax_x0020_Rate</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b4d2274b-edcb-48a8-8306-f032d79054ec">
+      <ID>Unit Price</ID>
+      <Name>Unit Price</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e0f6272f-cdad-41cb-8e53-b7cf2bd589d7">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b1925dc1-1d68-4340-98e3-1607358f9ed5">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Unit_x0020_Price</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="565ac692-d986-4085-8a97-397121909049">
+      <ID>Recommended Retail Price</ID>
+      <Name>Recommended Retail Price</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="998ef4b7-1499-4c8b-9033-bf7a4899e5a5">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="683cdb49-d571-42a0-ad65-390e32dc614d">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Recommended_x0020_Retail_x0020_Price</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="f05ac6f5-f74a-49cd-97a8-3341837c2a1e">
+      <ID>Typical Weight Per Unit</ID>
+      <Name>Typical Weight Per Unit</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="62933781-1734-43dc-8d02-1f17b90e0b37">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f95e069a-9ff4-41da-8fc5-643645f00ae3">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Typical_x0020_Weight_x0020_Per_x0020_Unit</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ce32cd03-a10a-4c95-accb-a302c1abeeab">
+      <ID>Photo</ID>
+      <Name>Photo</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d317a713-167a-4505-8c2d-49100fd79544">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="6c154b67-0724-4753-98c4-70c818bc99aa">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Stock_x0020_Item_x0020_Key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ValueColumn dwd:design-time-name="2272671e-cdda-4eda-80bf-0cdb597ff732">
+        <DataType>Binary</DataType>
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="b50a7a73-926d-43c3-a589-4abdb0f08b22">
+          <TableID>Dimension_Stock_x0020_Item</TableID>
+          <ColumnID>Photo</ColumnID>
+        </Source>
+      </ValueColumn>
+      <AttributeHierarchyEnabled>false</AttributeHierarchyEnabled>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="95956d1f-97ba-4d41-bc4f-9ed34a95332d">
+      <ID>Valid From</ID>
+      <Name>Valid From</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="e49c8d0b-7ca3-434a-915f-de23f4a74398">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="56229810-962d-4738-97c8-ee0ce178c19a">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Valid_x0020_From</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="c930f342-7696-4619-8a54-ce28758f86e8">
+      <ID>Valid To</ID>
+      <Name>Valid To</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f6e42e10-45fe-4cef-8bac-0f8f7ad2569c">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="81216d9e-690c-40e0-bd66-7efcea0a1975">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Valid_x0020_To</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1a32dd3d-ab20-4c35-968a-90f07834a017">
+      <ID>Lineage Key</ID>
+      <Name>Lineage Key</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="ebc9802d-879a-47b9-be0f-b6005867a330">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c80ea4c3-2859-48d7-aa67-af6017c2993f">
+            <TableID>Dimension_Stock_x0020_Item</TableID>
+            <ColumnID>Lineage_x0020_Key</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

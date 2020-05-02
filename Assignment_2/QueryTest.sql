@@ -53,6 +53,8 @@ select top 10 count(Fact.Sale.[Customer Key]) as [Least Sales], Dimension.Custom
 	group by Dimension.Customer.[Customer Key], Dimension.Customer.Customer
 	order by count(Fact.Sale.[Customer Key]) asc;
 
-select top 10 count(Fact.Sale.Profit) as SaleCount, Fact.Sale.Description from Fact.Sale group by Fact.Sale.Description order by count(Fact.Sale.Profit) desc;
 
 
+SELECT * FROM Fact.Sale
+
+select top 10 count(Fact.Sale.Profit) as [Most Profitable], Fact.Sale.Description from Fact.Sale group by Fact.Sale.Description order by count(Fact.Sale.Profit) desc;

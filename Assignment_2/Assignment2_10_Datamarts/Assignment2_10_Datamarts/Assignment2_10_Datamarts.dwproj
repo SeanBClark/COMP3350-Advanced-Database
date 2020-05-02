@@ -6,6 +6,44 @@
     <Name>Assignment2_10_Datamarts.database</Name>
     <FullPath>Assignment2_10_Datamarts.database</FullPath>
   </Database>
+  <Cubes>
+    <ProjectItem>
+      <Name>Wide World Importers DW.cube</Name>
+      <FullPath>Wide World Importers DW.cube</FullPath>
+      <Dependencies>
+        <ProjectItem>
+          <Name>Wide World Importers DW.partitions</Name>
+          <FullPath>Wide World Importers DW.partitions</FullPath>
+        </ProjectItem>
+      </Dependencies>
+    </ProjectItem>
+  </Cubes>
+  <Dimensions>
+    <ProjectItem>
+      <Name>DimCustomer.dim</Name>
+      <FullPath>DimCustomer.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DimStockItem.dim</Name>
+      <FullPath>DimStockItem.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>FactSale.dim</Name>
+      <FullPath>FactSale.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Customer.dim</Name>
+      <FullPath>Customer.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>City.dim</Name>
+      <FullPath>City.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Stock Item.dim</Name>
+      <FullPath>Stock Item.dim</FullPath>
+    </ProjectItem>
+  </Dimensions>
   <DataSources>
     <ProjectItem>
       <Name>Wide World Importers DW.ds</Name>
